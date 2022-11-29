@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+{% block title %}Details: {{movie.name}}{% endblock %}
+
+{% block body %}
+ <div class="card" style="width: 300px;">
+    <img src="{{asset("pictures/"~ movie.picture)}}" class="card-img-top img-fluid" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">{{movie.name}}</h5>
+        <p class="card-text">{{movie.description}}</p>
+        <p class="card-text">Category: {{movie.category}}</p>
+        <p class="card-text">Genre: {{movie.genre}}</p>
+        <p class="card-text"><small class="text-muted">Release Date:{{movie.releaseDate|date("Y")}}</small></p>
+  </div>
+</div> 
+
+<a href="/index" class="btn btn-primary">Go back</a>
+{% endblock %}

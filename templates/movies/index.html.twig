@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movies!{% endblock %}
+
+{# inserting the style sheet applied only for this file #}
+{% block stylesheets %}
+<link href="{{ asset("css/style.css") }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row row-cols-3">
+{% for movie in movies %}
+  <div class="card" style="width: 300px;">
+    <img src="{{asset("pictures/"~ movie.picture)}}" class="card-img-top img-fluid" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">{{movie.name}}</h5>
+        <p class="card-text">{{movie.description}}</p>
+        <a href="/details/{{movie.id}}" class="btn btn-success">Details</a>
+        <a href="/edit/{{movie.id}}" class="btn btn-warning">Edit</a>
+        <a href="delete/{{movie.id}}" class="btn btn-danger">Delete</a>
+  </div>
+</div>  
+{% endfor %}
+</div>
+</div>
+
+
+{% endblock %}
