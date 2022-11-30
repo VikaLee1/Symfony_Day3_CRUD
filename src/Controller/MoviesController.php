@@ -54,10 +54,24 @@ class MoviesController extends AbstractController
 
 // to edit the record
     #[Route('/edit/{id}', name: 'edit-movie')]
-    public function editAction(): Response
+    public function editAction(Request $request, ManagerRegistry $doctrine, $id): Response
     {
+        $movie = $doctrine->getRepository(Name::class)->find($id);
+      $form = $this->createForm(MovieType::class, $movie);
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid()) {
         
-        return $this->render('movies/edit.html.twig');
+          $movie = $form->getData();
+          
+          $em = $doctrine->getManager();
+          $em->persist($movie);
+          
+            return $this->redirectToRoute('movies');
+            }
+        return $this->render('movies/edit.html.twig',[
+            "form"=>$form->createView()
+        ]);
     }
 
 // query for details for every record from the database

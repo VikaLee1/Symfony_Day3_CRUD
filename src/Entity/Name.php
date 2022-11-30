@@ -32,6 +32,9 @@ class Name
     #[ORM\Column(length: 255)]
     private ?string $picture = null;
 
+    #[ORM\ManyToOne]
+    private ?status $fk_status = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Name
     public function setPicture(string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getFkStatus(): ?status
+    {
+        return $this->fk_status;
+    }
+
+    public function setFkStatus(?status $fk_status): self
+    {
+        $this->fk_status = $fk_status;
 
         return $this;
     }
